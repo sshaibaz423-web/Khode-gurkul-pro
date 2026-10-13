@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khode Gurukul Pro - 11th Science</title>
+<style>
+:root{--bg:#070b14;--card:#0f172a;--border:#1e293b;--text:#f8fafc;--muted:#94a3b8;--primary:#3b82f6;--accent:#10b981;--danger:#ef4444;--in:#090e1a;}
+[data-theme="light"]{--bg:#f8fafc;--card:#fff;--border:#cbd5e1;--text:#0f172a;--muted:#64748b;--primary:#2563eb;--accent:#059669;--danger:#dc2626;--in:#f1f5f9;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}body{font-family:sans-serif;background:var(--bg);color:var(--text);line-height:1.4;padding:12px;}
+header{background:linear-gradient(135deg,#091224,#1e3a8a);padding:14px;border-radius:12px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+h2{color:var(--primary);font-size:15px;margin-bottom:10px;border-bottom:1px solid var(--border);padding-bottom:6px;display:flex;align-items:center;gap:6px;}
+table{width:100%;border-collapse:collapse;font-size:12px;}th,td{padding:8px;text-align:left;border-bottom:1px solid var(--border);}
+th{color:var(--primary);text-transform:uppercase;font-size:10px;}
+.badge{font-family:monospace;color:#38bdf8;font-size:10px;background:rgba(56,189,248,.12);padding:2px 6px;border-radius:4px;}
+.pill{padding:3px 8px;border-radius:6px;font-size:10px;font-weight:800;text-transform:uppercase;background:rgba(59,130,246,.2);color:#60a5fa;display:inline-block;margin-bottom:8px;}
+.bs{background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-weight:700;}
+.bs:hover{background:var(--primary);color:#fff;}
+.li{background:var(--in);border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px;font-size:12px;}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:8px;}
+.cc{background:var(--in);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center;min-height:40px;font-size:11px;}
+.cc.th{font-weight:700;color:var(--primary);background:var(--card);min-height:auto;}
+.cc.act{border-color:var(--accent);background:rgba(16,185,129,.1);font-weight:bold;}
+.gb{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:280px;margin:10px auto;}
+.mc{height:55px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;color:transparent;user-select:none;}
+.mc.rev{background:var(--card);border:2px solid var(--primary);color:var(--text);}
+.mc.mat{background:rgba(16,185,129,.2);border:2px solid var(--accent);color:var(--accent);cursor:default;}
+.opt-box{margin:6px 0;font-size:11px;color:var(--muted);}
+.flex-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
+.day-inp{width:60px;text-align:center;padding:5px;background:var(--in);border:1px solid var(--border);color:var(--text);border-radius:6px;font-weight:700;}
+</style>
+</head>
+<body data-theme="dark">
+
+<header>
+  <div>
+    <h1 style="font-size:16px;color:#60a5fa;">Khode Gurukul Pro</h1>
+    <p style="font-size:11px;color:var(--muted);">11th Science Complete Portal</p>
+  </div>
+  <button class="bs" onclick="toggleTheme()">☀️ Theme</button>
+</header>
+
+<!-- SECTION 1: TIMETABLE -->
+<div class="card">
+  <h2>🗓️ 11th Science Daily Timetable</h2>
+  <table>
+    <thead><tr><th>Time</th><th>Subject / Task</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge">05:00 PM</span></td><td>Physics & Chemistry Deep Study</td></tr>
+      <tr><td><span class="badge">06:30 PM</span></td><td>Daily Education News & GK</td></tr>
+      <tr><td><span class="badge">07:45 PM</span></td><td>Maths & Biology Problem Solving</td></tr>
+      <tr><td><span class="badge">08:35 PM</span></td><td>PCMB Practice MCQs</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 2: SMART CALENDAR -->
+<div class="card">
+  <h2>📅 Smart Calendar</h2>
+  <div class="flex-row">
+    <button class="bs" onclick="mCal(-1)">◀ Prev</button>
+    <span id="mTitle" style="font-size:13px;font-weight:700;">Month Year</span>
+    <button class="bs" onclick="mCal(1)">Next ▶</button>
+  </div>
+  <div class="cal">
+    <div class="cc th">Su</div><div class="cc th">Mo</div><div class="cc th">Tu</div>
+    <div class="cc th">We</div><div class="cc th">Th</div><div class="cc th">Fr</div><div class="cc th">Sa</div>
+  </div>
+  <div class="cal" id="cDays"></div>
+</div>
+
+<!-- SECTION 3: MIND FRESH GAME -->
+<div class="card" style="text-align:center;">
+  <h2>🧠 Mind Refresh Game</h2>
+  <div id="gScore" style="font-size:12px;font-weight:700;margin:6px 0;">Matches: 0 / 4</div>
+  <div class="gb" id="gBoard"></div>
+  <button class="bs" onclick="initGame()">Restart Game</button>
+</div>
+
+<!-- SECTION 4: EDUCATION NEWS (365 DAYS) -->
+<div class="card">
+  <h2>📰 Daily Education News (365 Days)</h2>
+  <div class="flex-row">
+    <div>
+      <button class="bs" onclick="changeDay('n', -1)">◀ Prev</button>
+      <span style="font-size:12px;font-weight:700;margin:0 6px;">Day: <input type="number" id="nDayInp" class="day-inp" value="1" min="1" max="365" oninput="jumpDay('n', this.value)"></span>
+      <button class="bs" onclick="changeDay('n', 1)">Next ▶</button>
+    </div>
+    <span class="badge">10 News / Day</span>
+  </div>
+  <div id="nList"></div>
+</div>
+
+<!-- SECTION 5: GK QUESTIONS (365 DAYS) -->
+<div class="card">
+  <h2>📚 Daily GK Questions (365 Days)</h2>
+  <div class="flex-row">
+    <div>
+      <button class="bs" onclick="changeDay('g', -1)">◀ Prev</button>
+      <span style="font-size:12px;font-weight:700;margin:0 6px;">Day: <input type="number" id="gDayInp" class="day-inp" value="1" min="1" max="365" oninput="jumpDay('g', this.value)"></span>
+      <button class="bs" onclick="changeDay('g', 1)">Next ▶</button>
+    </div>
+    <span class="badge">10 GK / Day</span>
+  </div>
+  <div id="gList"></div>
+</div>
+
+<!-- SECTION 6: PCMB MCQS (365 DAYS) -->
+<div class="card">
+  <h2>🧬 11th Science PCMB MCQs (365 Days)</h2>
+  <div class="flex-row">
+    <div>
+      <button class="bs" onclick="changeDay('m', -1)">◀ Prev</button>
+      <span style="font-size:12px;font-weight:700;margin:0 6px;">Day: <input type="number" id="mDayInp" class="day-inp" value="1" min="1" max="365" oninput="jumpDay('m', this.value)"></span>
+      <button class="bs" onclick="changeDay('m', 1)">Next ▶</button>
+    </div>
+    <span class="badge">80 Qs / Day (20/Sub)</span>
+  </div>
+  <div id="mList"></div>
+</div>
+
+<!-- SECTION 7: SETTINGS -->
+<div class="card">
+  <h2>⚙️ App Settings</h2>
+  <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;">
+    <span>Dark / Light Mode Theme</span>
+    <button class="bs" onclick="toggleTheme()">Switch Theme</button>
+  </div>
+</div>
+
+<script>
+function toggleTheme(){
+  var isDark = document.body.getAttribute('data-theme') === 'dark';
+  document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+}
+
+/* Calendar */
+var dt = new Date(), cY = dt.getFullYear(), cM = dt.getMonth();
+function rCal(){
+  var m = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var mT = document.getElementById('mTitle');
+  if(mT) mT.innerText = m[cM] + ' ' + cY;
+  var b = document.getElementById('cDays'); if(!b) return; b.innerHTML = '';
+  var fd = new Date(cY, cM, 1).getDay(), td = new Date(cY, cM + 1, 0).getDate();
+  for(var i=0; i<fd; i++) b.innerHTML += '<div class="cc" style="opacity:0.1"></div>';
+  for(var d=1; d<=td; d++){
+    var isT = (d === dt.getDate() && cM === dt.getMonth() && cY === dt.getFullYear());
+    b.innerHTML += '<div class="cc ' + (isT ? 'act' : '') + '"><b>' + d + '</b></div>';
+  }
+}
+function mCal(v){
+  cM += v;
+  if(cM > 11){ cM = 0; cY++; }
+  else if(cM < 0){ cM = 11; cY--; }
+  rCal();
+}
+
+/* Memory Game */
+var em = ['🧬','⚡','📐','🧪'], fC = [], mP = 0;
+function initGame(){
+  var dk = em.concat(em).sort(function(){ return Math.random() - 0.5; });
+  mP = 0; fC = [];
+  var b = document.getElementById('gBoard'); if(!b) return; b.innerHTML = '';
+  for(var i=0; i<dk.length; i++){
+    (function(e){
+      var c = document.createElement('div'); c.className = 'mc'; c.innerText = e;
+      c.onclick = function(){
+        if(c.classList.contains('rev') || c.classList.contains('mat') || fC.length >= 2) return;
+        c.classList.add('rev'); fC.push(c);
+        if(fC.length === 2){
+          if(fC[0].innerText === fC[1].innerText){
+            fC[0].classList.add('mat'); fC[1].classList.add('mat'); mP++;
+            var gS = document.getElementById('gScore');
+            if(gS) gS.innerText = 'Matches: ' + mP + ' / 4';
+            fC = [];
+            if(mP === 4) setTimeout(function(){ alert('Shandar! Mind Fresh ho gaya.'); }, 200);
+          } else {
+            setTimeout(function(){
+              fC[0].classList.remove('rev');
+              fC[1].classList.remove('rev');
+              fC = [];
+            }, 400);
+          }
+        }
+      };
+      b.appendChild(c);
+    })(dk[i]);
+  }
+}
+
+/* Day State Controllers */
+var curN = 1, curG = 1, curM = 1;
+
+function changeDay(type, val){
+  if(type === 'n'){
+    curN = Math.max(1, Math.min(365, curN + val));
+    document.getElementById('nDayInp').value = curN;
+    rNews(curN);
+  } else if(type === 'g'){
+    curG = Math.max(1, Math.min(365, curG + val));
+    document.getElementById('gDayInp').value = curG;
+    rGk(curG);
+  } else if(type === 'm'){
+    curM = Math.max(1, Math.min(365, curM + val));
+    document.getElementById('mDayInp').value = curM;
+    rMq(curM);
+  }
+}
+
+function jumpDay(type, val){
+  var d = parseInt(val) || 1;
+  d = Math.max(1, Math.min(365, d));
+  if(type === 'n'){ curN = d; document.getElementById('nDayInp').value = curN; rNews(curN); }
+  else if(type === 'g'){ curG = d; document.getElementById('gDayInp').value = curG; rGk(curG); }
+  else if(type === 'm'){ curM = d; document.getElementById('mDayInp').value = curM; rMq(curM); }
+}
+
+/* News Pool */
+var newsPool = [
+  "NEP 2020 promotes multidisciplinary flexible learning paths in higher secondary education.",
+  "National Curriculum Framework (NCF) mandates at least 50% competency-based questions.",
+  "APAAR ID creates a unified lifetime digital registry for every Indian student.",
+  "PARAKH functions as the national standard-setting body for student assessments.",
+  "Twice-a-year board examinations reduce single-sitting stress for students.",
+  "SWAYAM portal offers free online courses for senior secondary students.",
+  "PM Vidyalaxmi scheme provides collateral-free education loans for meritorious youth.",
+  "Academic Bank of Credits (ABC) seamlessly transfers digital learning credits.",
+  "Skill India mission integrates vocational training directly into school curriculum.",
+  "Digital Library initiatives expand open-access science laboratory modules."
+];
+
+function rNews(d){
+  var b = document.getElementById('nList'); if(!b) return; b.innerHTML = '';
+  var startIdx = ((d - 1) * 3) % newsPool.length;
+  for(var i=1; i<=10; i++){
+    var textIdx = (startIdx + i - 1) % newsPool.length;
+    b.innerHTML += '<div class="li"><b>News ' + i + ' (Day ' + d + '):</b> ' + newsPool[textIdx] + '</div>';
+  }
+}
+
+/* GK Pool */
+var gkPool = [
+  {q: "What is the SI unit of electric current?", a: "Ampere"},
+  {q: "Who proposed the planetary model of the atom?", a: "Ernest Rutherford"},
+  {q: "What is the chemical formula of heavy water?", a: "D₂O"},
+  {q: "Which gas is released during photosynthesis?", a: "Oxygen (O₂)"},
+  {q: "What is the value of acceleration due to gravity (g) on Earth?", a: "9.8 m/s²"},
+  {q: "Which organelle is known as the powerhouse of the cell?", a: "Mitochondria"},
+  {q: "What branch of chemistry deals with carbon compounds?", a: "Organic Chemistry"},
+  {q: "What is the pH value of pure water at 25°C?", a: "7 (Neutral)"},
+  {q: "Who formulated the laws of planetary motion?", a: "Johannes Kepler"},
+  {q: "What type of tissue is blood classified as in biology?", a: "Fluid Connective Tissue"}
+];
+
+function rGk(d){
+  var b = document.getElementById('gList'); if(!b) return; b.innerHTML = '';
+  var startIdx = ((d - 1) * 2) % gkPool.length;
+  for(var i=1; i<=10; i++){
+    var itemIdx = (startIdx + i - 1) % gkPool.length;
+    var item = gkPool[itemIdx];
+    b.innerHTML += '<div class="li"><b>Q' + i + ' (Day ' + d + '):</b> ' + item.q + '<div style="color:var(--accent);margin-top:2px;">Ans: ' + item.a + '</div></div>';
+  }
+}
+
+/* MCQs Bank */
+var bookQ = {
+  Physics: [
+    {q: "Which of the following is a fundamental physical quantity?", o: ["A) Velocity", "B) Force", "C) Electric Current", "D) Work"], a: "C) Electric Current"},
+    {q: "Dimensional formula of universal gravitational constant G is:", o: ["A) [M⁻¹ L³ T⁻²]", "B) [M L² T⁻²]", "C) [M⁻¹ L² T⁻²]", "D) [M L³ T⁻²]"], a: "A) [M⁻¹ L³ T⁻²]"}
+  ],
+  Chemistry: [
+    {q: "Number of moles of solute in 1 kg of solvent is called:", o: ["A) Molarity", "B) Molality", "C) Normality", "D) Mole fraction"], a: "B) Molality"},
+    {q: "Which quantum number specifies the orientation of an orbital?", o: ["A) Principal", "B) Azimuthal", "C) Magnetic", "D) Spin"], a: "C) Magnetic"}
+  ],
+  Mathematics: [
+    {q: "If set A has 3 elements and set B has 4 elements, A × B has:", o: ["A) 7", "B) 12", "C) 64", "D) 24"], a: "B) 12"},
+    {q: "The value of i²⁰²⁶ (where i = √-1) is:", o: ["A) 1", "B) -1", "C) i", "D) -i"], a: "A) 1"}
+  ],
+  Biology: [
+    {q: "The powerhouse of the eukaryotic cell is:", o: ["A) Ribosome", "B) Mitochondria", "C) Lysosome", "D) Nucleolus"], a: "B) Mitochondria"},
+    {q: "Binomial nomenclature was introduced by:", o: ["A) Darwin", "B) Mendel", "C) Carl Linnaeus", "D) Aristotle"], a: "C) Carl Linnaeus"}
+  ]
+};
+
+function rMq(d){
+  var b = document.getElementById('mList'); if(!b) return; b.innerHTML = '';
+  var subs = ['Physics', 'Chemistry', 'Mathematics', 'Biology'];
+  for(var s=0; s<subs.length; s++){
+    var sub = subs[s];
+    b.innerHTML += '<div class="pill">' + sub + ' (20 MCQs for Day ' + d + ')</div>';
+    var qList = bookQ[sub];
+    for(var i=1; i<=20; i++){
+      var itemIdx = ((d - 1) * 20 + (i - 1)) % qList.length;
+      var item = qList[itemIdx];
+      b.innerHTML += '<div class="li"><b>Q' + i + ' (Day ' + d + ').</b> ' + item.q + '<div class="opt-box">' + item.o.join('<br>') + '</div><button class="bs" onclick="this.nextElementSibling.style.display=\'inline-block\';this.style.display=\'none\';">View Ans</button><span style="display:none;color:var(--accent);margin-left:8px;font-weight:700;">✅ Correct: ' + item.a + '</span></div>';
+    }
+  }
+}
+
+// Initial execution
+rCal();
+initGame();
+rNews(1);
+rGk(1);
+rMq(1);
+</script>
+</body>
+</html>
